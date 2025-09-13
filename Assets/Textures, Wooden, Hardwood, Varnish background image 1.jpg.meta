@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Textures, Wooden, Hardwood, Varnish background image 1_0: -5224156396444670027
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
