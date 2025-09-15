@@ -119,6 +119,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6809003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6809005}
+  - component: {fileID: 6809006}
+  m_Layer: 0
+  m_Name: AudioSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6809005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809003}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 285.77542, y: 1106.3633, z: -15.534361}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6809006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503a90d59ea90504480a22ea49b23ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 2a7635b5ad6dfb6448cb88d5708cd1d8, type: 2}
+  bgmParam: BGMVolume
+  sfxParam: SFXVolume
+  minDb: -80
+  maxDb: 0
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!1 &170048953
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 216443378}
   - component: {fileID: 216443379}
+  - component: {fileID: 216443380}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -296,6 +348,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &216443380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216443377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a00f7b1e8642c43a97ff3a7e58b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: 1
+  slider: {fileID: 216443379}
 --- !u!1 &231219924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297284473}
   - component: {fileID: 1297284474}
+  - component: {fileID: 1297284475}
   m_Layer: 5
   m_Name: BGM Slider
   m_TagString: Untagged
@@ -1354,6 +1421,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1297284475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297284472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a00f7b1e8642c43a97ff3a7e58b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: 0
+  slider: {fileID: 1297284474}
 --- !u!1 &1383883697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d9a193a73d002449035d74ed5f8625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 3ef55359ecd8ed54298d135bf0571917, type: 2}
+  audioMixer: {fileID: 24100000, guid: 2a7635b5ad6dfb6448cb88d5708cd1d8, type: 2}
   BGMSlider: {fileID: 1297284474}
   SFXSlider: {fileID: 216443379}
 --- !u!1 &1470868580
@@ -1867,57 +1948,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514512893}
   m_CullTransparentMesh: 1
---- !u!1 &1594785080
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1594785082}
-  - component: {fileID: 1594785081}
-  m_Layer: 0
-  m_Name: OptionsAudioUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1594785081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594785080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d2733314ad443d4686f5b92b47bdd43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 2a7635b5ad6dfb6448cb88d5708cd1d8, type: 2}
-  sfxParam: SFXVolume
-  bgmParam: BGMVolume
-  minDb: -80
-  maxDb: 0
-  sfxSlider: {fileID: 216443379}
-  bgmSlider: {fileID: 1297284474}
---- !u!4 &1594785082
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594785080}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 451.61172, y: 927.9692, z: -7.587699}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1643928903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,4 +2167,4 @@ SceneRoots:
   - {fileID: 1643928906}
   - {fileID: 1147693188}
   - {fileID: 1431810034}
-  - {fileID: 1594785082}
+  - {fileID: 6809005}
