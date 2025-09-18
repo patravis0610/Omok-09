@@ -1,107 +1,55 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class AuthPopup : MonoBehaviour
 {
-    public static AuthPopup Instance { get; private set; }
-
-    [Header("Wiring")]
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private GameObject root;        // AuthPopup (this) 지정
+    [SerializeField] private GameObject root;
     [SerializeField] private Button loginButton;
-    [SerializeField] private Button signupButton;
-    [SerializeField] private Button closeButton;     // 선택
-    [SerializeField] private Button backdropButton;  // Backdrop에 있는 Button
+    [SerializeField] private Button signUpButton;
+    [SerializeField] private Button closeButton;
 
-    [SerializeField] private float fadeTime = 0.15f;
+    public UnityEvent onLoginClicked;
+    public UnityEvent onSignUpClicked;
+
+    private GameObject Root => root ? root : gameObject;
+
+    private void Reset() { root = gameObject; }
+#if UNITY_EDITOR
+    private void OnValidate() { if (!root) root = gameObject; }
+#endif
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-
-        if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
-        if (!root) root = gameObject;
-
-        // 시작은 숨김
-        HideImmediate();
-
-        // 버튼 이벤트
-        if (loginButton) loginButton.onClick.AddListener(OnLoginClicked);
-        if (signupButton) signupButton.onClick.AddListener(OnSignupClicked);
-        if (closeButton) closeButton.onClick.AddListener(Close);
-        if (backdropButton) backdropButton.onClick.AddListener(Close);
+        if (loginButton) loginButton.onClick.AddListener(() => onLoginClicked?.Invoke());
+        if (signUpButton) signUpButton.onClick.AddListener(() => onSignUpClicked?.Invoke());
+        if (closeButton) closeButton.onClick.AddListener(Hide);
+        HideInstant();
     }
 
-    private void Update()
+    public void Show()
     {
-        if (root.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-            Close();
+        Root.SetActive(true);
+
+        // 맨 위로 올려 뒤에 깔리지 않게
+        transform.SetAsLastSibling();
+
+        // CanvasGroup을 쓴 경우 보정
+        var cg = GetComponent<CanvasGroup>();
+        if (cg) { cg.alpha = 1f; cg.interactable = true; cg.blocksRaycasts = true; }
     }
 
-    public void Open()
+    public void Hide()
     {
-        StopAllCoroutines();
-        root.SetActive(true);
-        StartCoroutine(Fade(0f, 1f, true));
+        var cg = GetComponent<CanvasGroup>();
+        if (cg) { cg.alpha = 0f; cg.interactable = false; cg.blocksRaycasts = false; }
+        Root.SetActive(false);
     }
 
-    public void Close()
-    {
-        StopAllCoroutines();
-        StartCoroutine(Fade(1f, 0f, false));
-    }
-
-    private void HideImmediate()
-    {
-        if (canvasGroup)
-        {
-            canvasGroup.alpha = 0f;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-        }
-        root.SetActive(false);
-    }
-
-    private IEnumerator Fade(float from, float to, bool keepActive)
-    {
-        if (!canvasGroup) yield break;
-
-        canvasGroup.alpha = from;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
-
-        float t = 0f;
-        while (t < fadeTime)
-        {
-            t += Time.unscaledDeltaTime;
-            canvasGroup.alpha = Mathf.Lerp(from, to, t / fadeTime);
-            yield return null;
-        }
-        canvasGroup.alpha = to;
-
-        if (!keepActive)
-        {
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            root.SetActive(false);
-        }
-    }
-
-    // 여기는 원하는 인증 흐름으로 바꿔 연결하세요.
-    private void OnLoginClicked()
-    {
-        Debug.Log("[AuthPopup] 로그인 클릭");
-        // 예: SceneManager.LoadScene("LoginScene");
-        // 혹은 자체 로그인 패널 열기
-    }
-
-    private void OnSignupClicked()
-    {
-        Debug.Log("[AuthPopup] 회원가입 클릭");
-        // 예: Application.OpenURL("https://your.site/signup");
-        // 혹은 회원가입 패널/씬 열기
-    }
+    public void HideInstant() => Root.SetActive(false);
 }
+
+
+
+
 
