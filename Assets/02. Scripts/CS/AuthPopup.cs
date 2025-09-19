@@ -19,13 +19,16 @@ public class AuthPopup : MonoBehaviour
     private void OnValidate() { if (!root) root = gameObject; }
 #endif
 
+    // AuthPopup.cs (수정)
     private void Awake()
     {
         if (loginButton) loginButton.onClick.AddListener(() => onLoginClicked?.Invoke());
         if (signUpButton) signUpButton.onClick.AddListener(() => onSignUpClicked?.Invoke());
         if (closeButton) closeButton.onClick.AddListener(Hide);
-        HideInstant();
+
+        // HideInstant();  // ← 이 줄 삭제
     }
+
 
     public void Show()
     {
