@@ -15,20 +15,21 @@ public class GameManager : Singleton<GameManager>
     // Panel을 띄우기 위한 Canvas 정보
     private Canvas _canvas;
 
-    // Game Logic
-    //*private GameLogic _gameLogic;
-
     // Game 씬의 UI를 담당하는 객체
-    //*private GameUIController _gameUIController;
+    private GameUIController _gameUIController;
+
+    // Game Logic
+    private GameLogic _gameLogic;
+
 
     private void Start()
     {
-        // 로그인
-        var sid = PlayerPrefs.GetString("sid");
-        if (string.IsNullOrEmpty(sid))
-        {
-            OpenSigninPanel();
-        }
+        //// 로그인
+        //var sid = PlayerPrefs.GetString("sid");
+        //if (string.IsNullOrEmpty(sid))
+        //{
+        //    OpenSigninPanel();
+        //}
     }
 
     /// <summary>
@@ -37,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     public void ChangeToGameScene(Constants.GameType gameType)
     {
         _gameType = gameType;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("GameScene_SH");
     }
 
     /// <summary>
@@ -47,7 +48,7 @@ public class GameManager : Singleton<GameManager>
     {
         //*_gameLogic?.Dispose();
         //*_gameLogic = null;
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("MainMenu");
     }
 
     /// <summary>
@@ -60,9 +61,13 @@ public class GameManager : Singleton<GameManager>
         if (_canvas != null)
         {
             var confirmPanelObject = Instantiate(confirmPanel, _canvas.transform);
-            confirmPanelObject.GetComponent<ConfirmPanelController>()
-                .Show(message, onConfirmButtonClicked);
+            confirmPanelObject.GetComponent<ConfirmPanelController>().Show(message, onConfirmButtonClicked);
         }
+    }
+
+    public void SetGameTurnPanel(GameUIController.GameTurnPanelType gameTurnPanelType)
+    {
+        _gameUIController.SetGameTurnPanel(gameTurnPanelType);
     }
 
     /// <summary>
@@ -97,12 +102,12 @@ public class GameManager : Singleton<GameManager>
 
     protected override void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        /*_canvas = FindFirstObjectByType<Canvas>();
+        _canvas = FindFirstObjectByType<Canvas>();
 
-        if (scene.name == "Game")
+        if (scene.name == "GameScene_SH")
         {
             // Block 초기화
-            var blockController = FindFirstObjectByType<BlockController>();
+            var blockController = FindFirstObjectByType<BoardController>();
             if (blockController != null)
             {
                 blockController.InitBlocks();
@@ -114,11 +119,12 @@ public class GameManager : Singleton<GameManager>
             {
                 _gameUIController.SetGameTurnPanel(GameUIController.GameTurnPanelType.None);
             }
+            _gameUIController.SetGameTitle(_gameType);
 
             // GameLogic 생성
-            if (_gameLogic != null) _gameLogic.Dispose();
+            //if (_gameLogic != null) _gameLogic.Dispose();
             _gameLogic = new GameLogic(blockController, _gameType);
-        }*/
+        }
     }
 
     /*private void OnApplicationQuit()

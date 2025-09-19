@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 831490238997340275}
+      - m_Target: {fileID: 94502491738930486}
         m_TargetAssemblyTypeName: ConfirmPanelController, Assembly-CSharp
         m_MethodName: OnClickConfirmButton
         m_Mode: 1
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 3989924621712255058}
   - component: {fileID: 4974417865716211315}
   - component: {fileID: 3870090793909174542}
-  - component: {fileID: 831490238997340275}
+  - component: {fileID: 94502491738930486}
   m_Layer: 5
   m_Name: ConfirmPanel
   m_TagString: Untagged
@@ -437,7 +437,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &831490238997340275
+--- !u!114 &94502491738930486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2944594627879963278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cda194e3b125b4f81817a0ddbdb938, type: 3}
+  m_Script: {fileID: 11500000, guid: 7935d33dbdeecf641bfd8a5447967c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panelRectTransform: {fileID: 8959614334231245189}
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 831490238997340275}
+      - m_Target: {fileID: 94502491738930486}
         m_TargetAssemblyTypeName: ConfirmPanelController, Assembly-CSharp
         m_MethodName: OnClickCloseButton
         m_Mode: 1

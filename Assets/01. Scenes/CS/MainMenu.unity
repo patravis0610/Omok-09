@@ -1091,7 +1091,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 384867518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2101185571}
+        m_TargetAssemblyTypeName: MainPanelController_Test, Assembly-CSharp
+        m_MethodName: OnClickDualPlayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &384867518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3946,7 +3958,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e01f5744aefe6c949b8cfd23b8abf959, type: 3}
   m_Resource: {fileID: 8300000, guid: e01f5744aefe6c949b8cfd23b8abf959, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.099
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7376,7 +7388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1696593162}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2101185571}
+        m_TargetAssemblyTypeName: MainPanelController_Test, Assembly-CSharp
+        m_MethodName: OnClickSinglePlayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1696593162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8465,6 +8489,7 @@ GameObject:
   - component: {fileID: 2101185568}
   - component: {fileID: 2101185570}
   - component: {fileID: 2101185569}
+  - component: {fileID: 2101185571}
   m_Layer: 5
   m_Name: Main Panel
   m_TagString: Untagged
@@ -8531,6 +8556,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101185567}
   m_CullTransparentMesh: 1
+--- !u!114 &2101185571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101185567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb957b702647ab14aaf459faf5d40b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2102098136
 GameObject:
   m_ObjectHideFlags: 0
@@ -8667,6 +8704,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102098136}
   m_CullTransparentMesh: 1
+--- !u!1 &2145851072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145851074}
+  - component: {fileID: 2145851073}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2145851073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145851072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1b955c80b0a4d4f9d73dec27f15a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmPanel: {fileID: 2944594627879963278, guid: f1cac1252a8732241821d47de9666336, type: 3}
+  signinPanel: {fileID: 0}
+  signupPanel: {fileID: 0}
+--- !u!4 &2145851074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145851072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &9199168343851620336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8806,3 +8890,4 @@ SceneRoots:
   - {fileID: 1064953828}
   - {fileID: 454531946}
   - {fileID: 984830553}
+  - {fileID: 2145851074}
