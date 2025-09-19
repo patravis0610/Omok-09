@@ -11,6 +11,7 @@ public class SignUpPanel : MonoBehaviour
     [SerializeField] TMP_InputField emailInput;
     [SerializeField] TMP_InputField passwordInput;
     [SerializeField] TMP_InputField confirmInput;
+    [SerializeField] TMP_InputField nicknameInput;   // ★ 닉네임 추가
     [SerializeField] Button submitButton;   // 가입
     [SerializeField] Button cancelButton;   // 취소
     [SerializeField] Button togglePwButton;        // (선택) 비번 눈모양
@@ -58,12 +59,15 @@ public class SignUpPanel : MonoBehaviour
 
     public void HideInstant() => Root.SetActive(false);
 
-    public void Clear()
+    void Clear()
     {
         if (emailInput) emailInput.text = "";
         if (passwordInput) passwordInput.text = "";
         if (confirmInput) confirmInput.text = "";
+        if (nicknameInput) nicknameInput.text = "";   // ★ 닉네임 비우기
+
         pwVisible = confirmVisible = false;
+
         if (passwordInput)
         {
             passwordInput.contentType = TMP_InputField.ContentType.Password;
@@ -76,6 +80,13 @@ public class SignUpPanel : MonoBehaviour
             confirmInput.ForceLabelUpdate();
             confirmInput.DeactivateInputField();
         }
+        if (nicknameInput) // ★ 선택: 커서/포커스 제거
+        {
+            nicknameInput.contentType = TMP_InputField.ContentType.Standard;
+            nicknameInput.ForceLabelUpdate();
+            nicknameInput.DeactivateInputField();
+        }
+
         if (errorText) errorText.text = "";
     }
 
