@@ -1603,7 +1603,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 484214960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1237927709}
+        m_TargetAssemblyTypeName: SignupPanelController, Assembly-CSharp
+        m_MethodName: OnClickCancelButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &484214960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3278,7 +3290,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 952409966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1473505672}
+        m_TargetAssemblyTypeName: SigninPanelController, Assembly-CSharp
+        m_MethodName: OnClickConfirmButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &952409966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3922,7 +3946,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e01f5744aefe6c949b8cfd23b8abf959, type: 3}
   m_Resource: {fileID: 8300000, guid: e01f5744aefe6c949b8cfd23b8abf959, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5291,7 +5315,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1237927705}
   - component: {fileID: 1237927706}
+  - component: {fileID: 1237927709}
   - component: {fileID: 1237927708}
+  - component: {fileID: 1237927710}
   m_Layer: 5
   m_Name: SignUpPanel
   m_TagString: Untagged
@@ -5360,6 +5386,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237927704}
   m_CullTransparentMesh: 1
+--- !u!114 &1237927709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237927704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a9666ef4d4d154d86cc2214efb87b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelRectTransform: {fileID: 1311179554}
+  usernameInputField: {fileID: 1647152073}
+  passwordInputField: {fileID: 846926682}
+  confirmPasswordInputField: {fileID: 1557404354}
+  nicknameInputField: {fileID: 517104587}
+--- !u!225 &1237927710
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237927704}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1250064949
 GameObject:
   m_ObjectHideFlags: 0
@@ -6289,7 +6344,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1473505668}
   - component: {fileID: 1473505669}
+  - component: {fileID: 1473505672}
   - component: {fileID: 1473505671}
+  - component: {fileID: 1473505673}
   m_Layer: 5
   m_Name: LoginPanel
   m_TagString: Untagged
@@ -6352,6 +6409,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473505667}
   m_CullTransparentMesh: 1
+--- !u!114 &1473505672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473505667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1dc09ef1f54984a9ad388f7550401b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelRectTransform: {fileID: 514943355}
+  usernameInputField: {fileID: 226984520}
+  passwordInputField: {fileID: 1369781237}
+--- !u!225 &1473505673
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473505667}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1529337574
 GameObject:
   m_ObjectHideFlags: 0
@@ -8221,7 +8305,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2012375359}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1237927709}
+        m_TargetAssemblyTypeName: SignupPanelController, Assembly-CSharp
+        m_MethodName: OnClickConfirmButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2041109558
 GameObject:
   m_ObjectHideFlags: 0
