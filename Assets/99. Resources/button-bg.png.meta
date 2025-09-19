@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ec4d7b02766e29747b563408154ef110
+guid: 83acf2c15ddcbf344ae6dd60eb6872a0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2568739617416780070
-    second: Textures, Wooden, Hardwood, Varnish background image_0
+      213: -7588747339170474176
+    second: button-bg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Textures, Wooden, Hardwood, Varnish background image_0
+      name: button-bg_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1600
-        height: 1000
+        width: 300
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad6666f7de00a5cd0800000000000000
-      internalID: -2568739617416780070
+      spriteID: 0479d8e708a5fa690800000000000000
+      internalID: -7588747339170474176
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Textures, Wooden, Hardwood, Varnish background image_0: -2568739617416780070
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
