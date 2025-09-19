@@ -1,33 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro;
 using System.Text.RegularExpressions;
 
 public class SignUpPanel : MonoBehaviour
 {
     [Header("Root & Widgets")]
-    [SerializeField] GameObject root;
-    [SerializeField] TMP_InputField emailInput;
-    [SerializeField] TMP_InputField passwordInput;
-    [SerializeField] TMP_InputField confirmInput;
-    [SerializeField] TMP_InputField nicknameInput;   // ¡Ú ´Ð³×ÀÓ Ãß°¡
-    [SerializeField] Button submitButton;   // °¡ÀÔ
-    [SerializeField] Button cancelButton;   // Ãë¼Ò
-    [SerializeField] Button togglePwButton;        // (¼±ÅÃ) ºñ¹ø ´«¸ð¾ç
-    [SerializeField] Button toggleConfirmPwButton; // (¼±ÅÃ) È®ÀÎ ºñ¹ø ´«¸ð¾ç
-    [SerializeField] TMP_Text errorText;
+    [SerializeField] private GameObject root;
+    [SerializeField] private TMP_InputField emailInput;
+    [SerializeField] private TMP_InputField passwordInput;
+    [SerializeField] private TMP_InputField confirmInput;
+    [SerializeField] private TMP_InputField nicknameInput;     // ¡Ú ´Ð³×ÀÓ
+    [SerializeField] private Button submitButton;      // °¡ÀÔ
+    [SerializeField] private Button cancelButton;      // Ãë¼Ò
+    [SerializeField] private Button togglePwButton;    // (¼±ÅÃ) ºñ¹ø ´«¸ð¾ç
+    [SerializeField] private Button toggleConfirmPwButton; // (¼±ÅÃ) È®ÀÎ ºñ¹ø ´«¸ð¾ç
+    [SerializeField] private TMP_Text errorText;
 
     [Header("Events")]
-    // ½ÇÁ¦ È¸¿ø°¡ÀÔ Ã³¸®´Â ¿ÜºÎ(³×Æ®¿öÅ© ¸Å´ÏÀú µî)¿¡¼­ ±¸ÇöÇÏ¼¼¿ä.
-    // email, password Àü´Þ
+    // ±âÁ¸ È£È¯: ÀÌ¸ÞÀÏ/ºñ¹ø¸¸ ¿ÜºÎ·Î ³Ñ±è (¼­¹ö ¿¬µ¿ µîÀº ¿ÜºÎ¿¡¼­)
     public UnityEvent<string, string> onSubmit;
     public UnityEvent onCancel;
 
-    bool pwVisible = false;
-    bool confirmVisible = false;
+    private bool pwVisible = false;
+    private bool confirmVisible = false;
 
-    GameObject Root => root ? root : gameObject;
+    private GameObject Root => root ? root : gameObject;
 
     void Reset() { root = gameObject; }
 #if UNITY_EDITOR
@@ -36,19 +36,37 @@ public class SignUpPanel : MonoBehaviour
 
     void Awake()
     {
-        if (submitButton) { submitButton.onClick.RemoveAllListeners(); submitButton.onClick.AddListener(TrySubmit); }
-        if (cancelButton) { cancelButton.onClick.RemoveAllListeners(); cancelButton.onClick.AddListener(CancelAndClose); }
-        if (togglePwButton) { togglePwButton.onClick.RemoveAllListeners(); togglePwButton.onClick.AddListener(TogglePw); }
-        if (toggleConfirmPwButton) { toggleConfirmPwButton.onClick.RemoveAllListeners(); toggleConfirmPwButton.onClick.AddListener(ToggleConfirmPw); }
+        if (submitButton)
+        {
+            submitButton.onClick.RemoveAllListeners();
+            submitButton.onClick.AddListener(TrySubmit);
+        }
+        if (cancelButton)
+        {
+            cancelButton.onClick.RemoveAllListeners();
+            cancelButton.onClick.AddListener(CancelAndClose);
+        }
+        if (togglePwButton)
+        {
+            togglePwButton.onClick.RemoveAllListeners();
+            togglePwButton.onClick.AddListener(TogglePw);
+        }
+        if (toggleConfirmPwButton)
+        {
+            toggleConfirmPwButton.onClick.RemoveAllListeners();
+            toggleConfirmPwButton.onClick.AddListener(ToggleConfirmPw);
+        }
+
         if (errorText) errorText.text = "";
-        HideInstant();
+        HideInstant(); // ½ÃÀÛ ½Ã ºñÈ°¼ºÈ­
     }
 
+    // === ¿ÜºÎ¿¡¼­ ¿­±â/´Ý±â¿ë API (MainMenuUI µî¿¡¼­ È£Ãâ) ===
     public void Show()
     {
         Root.SetActive(true);
-        Clear(); // ¿­¸± ¶§ Ç×»ó ÃÊ±âÈ­
-        if (emailInput) emailInput.ActivateInputField();
+        Clear();                       // Ç×»ó ÃÊ±âÈ­
+        StartCoroutine(FocusNickname()); // ´Ð³×ÀÓ ¸ÕÀú Æ÷Ä¿½º
     }
 
     public void Hide()
@@ -58,13 +76,15 @@ public class SignUpPanel : MonoBehaviour
     }
 
     public void HideInstant() => Root.SetActive(false);
+    // ========================================================
 
-    void Clear()
+    /// <summary> ¸ðµç ÀÔ·Â/Ç¥½Ã »óÅÂ ÃÊ±âÈ­ </summary>
+    private void Clear()
     {
         if (emailInput) emailInput.text = "";
         if (passwordInput) passwordInput.text = "";
         if (confirmInput) confirmInput.text = "";
-        if (nicknameInput) nicknameInput.text = "";   // ¡Ú ´Ð³×ÀÓ ºñ¿ì±â
+        if (nicknameInput) nicknameInput.text = ""; // ¡Ú ´Ð³×ÀÓ ºñ¿ì±â
 
         pwVisible = confirmVisible = false;
 
@@ -80,7 +100,7 @@ public class SignUpPanel : MonoBehaviour
             confirmInput.ForceLabelUpdate();
             confirmInput.DeactivateInputField();
         }
-        if (nicknameInput) // ¡Ú ¼±ÅÃ: Ä¿¼­/Æ÷Ä¿½º Á¦°Å
+        if (nicknameInput)
         {
             nicknameInput.contentType = TMP_InputField.ContentType.Standard;
             nicknameInput.ForceLabelUpdate();
@@ -90,46 +110,80 @@ public class SignUpPanel : MonoBehaviour
         if (errorText) errorText.text = "";
     }
 
-    void CancelAndClose()
+    private System.Collections.IEnumerator FocusNickname()
+    {
+        // SetActive(true) Á÷ÈÄ ÇÑ ÇÁ·¹ÀÓ µÚ¿¡ Æ÷Ä¿½º ÁÖ´Â °Ô ¾ÈÁ¤Àû
+        yield return null;
+
+        if (nicknameInput && nicknameInput.interactable)
+        {
+            EventSystem.current?.SetSelectedGameObject(nicknameInput.gameObject);
+            nicknameInput.ActivateInputField();
+            nicknameInput.caretPosition = nicknameInput.text.Length;
+        }
+        else if (emailInput)
+        {
+            EventSystem.current?.SetSelectedGameObject(emailInput.gameObject);
+            emailInput.ActivateInputField();
+        }
+    }
+
+    private void CancelAndClose()
     {
         Hide();
         onCancel?.Invoke();
     }
 
-    void TogglePw()
+    private void TogglePw()
     {
         pwVisible = !pwVisible;
         if (!passwordInput) return;
-        passwordInput.contentType = pwVisible ? TMP_InputField.ContentType.Standard
-                                              : TMP_InputField.ContentType.Password;
+
+        passwordInput.contentType = pwVisible
+            ? TMP_InputField.ContentType.Standard
+            : TMP_InputField.ContentType.Password;
         passwordInput.ForceLabelUpdate();
     }
 
-    void ToggleConfirmPw()
+    private void ToggleConfirmPw()
     {
         confirmVisible = !confirmVisible;
         if (!confirmInput) return;
-        confirmInput.contentType = confirmVisible ? TMP_InputField.ContentType.Standard
-                                                  : TMP_InputField.ContentType.Password;
+
+        confirmInput.contentType = confirmVisible
+            ? TMP_InputField.ContentType.Standard
+            : TMP_InputField.ContentType.Password;
         confirmInput.ForceLabelUpdate();
     }
 
-    void TrySubmit()
+    private void TrySubmit()
     {
-        var email = emailInput ? emailInput.text.Trim() : "";
-        var pw = passwordInput ? passwordInput.text : "";
-        var cf = confirmInput ? confirmInput.text : "";
+        string email = emailInput ? emailInput.text.Trim() : "";
+        string pw = passwordInput ? passwordInput.text : "";
+        string cf = confirmInput ? confirmInput.text : "";
+        string nick = nicknameInput ? nicknameInput.text.Trim() : "";
 
         if (!IsValidEmail(email)) { SetError("ÀÌ¸ÞÀÏ Çü½ÄÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù."); return; }
         if (string.IsNullOrEmpty(pw) || pw.Length < 6) { SetError("ºñ¹Ð¹øÈ£¸¦ 6ÀÚ ÀÌ»ó ÀÔ·ÂÇÏ¼¼¿ä."); return; }
         if (pw != cf) { SetError("ºñ¹Ð¹øÈ£¿Í È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù."); return; }
+        if (!IsValidNickname(nick)) { SetError("´Ð³×ÀÓÀº 2~16ÀÚ, ÇÑ±Û/¿µ¹®/¼ýÀÚ/_ ¸¸ °¡´ÉÇÕ´Ï´Ù."); return; }
 
-        // ÇÊ¿äÇÏ¸é Ãß°¡ ±ÔÄ¢(¿µ¹®/¼ýÀÚ Á¶ÇÕ µî) ¿©±â¿¡¼­ Ã¼Å©
+        // ±âÁ¸ È£È¯: ÀÌ¸ÞÀÏ/ºñ¹ø¸¸ Àü´Þ (´Ð³×ÀÓÀº ¿ÜºÎ¿¡¼­ nicknameInput.text·Î Á÷Á¢ ÂüÁ¶ÇØµµ µÊ)
         onSubmit?.Invoke(email, pw);
     }
 
-    bool IsValidEmail(string s) => Regex.IsMatch(s, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
-    void SetError(string msg) { if (errorText) errorText.text = msg; }
+    // ===== À¯Æ¿ =====
+    private bool IsValidEmail(string s)
+        => Regex.IsMatch(s, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
+
+    // ÇÑ±Û/¿µ¹®/¼ýÀÚ/¹ØÁÙ 2~16ÀÚ, °ø¹é ±ÝÁö
+    private bool IsValidNickname(string s)
+        => !string.IsNullOrWhiteSpace(s) &&
+           Regex.IsMatch(s, @"^[°¡-ÆRa-zA-Z0-9_]{2,16}$");
+
+    private void SetError(string msg)
+    {
+        if (errorText) errorText.text = msg;
+        Debug.LogWarning(msg);
+    }
 }
-
-
